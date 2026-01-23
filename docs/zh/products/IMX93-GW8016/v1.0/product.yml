@@ -1,0 +1,11 @@
+# Product Configuration for IMX93-GW8016 v1.0
+name: IMX93-GW8016
+version: v1.0
+title_zh: IMX93-GW8016 LoRaWAN网关文档
+title_en: IMX93-GW8016 LoRaWAN Gateway Documentation
+description_zh: 网关内置chirpstack，桥接lorawan协议与modbus TCp、BACnet BIP协议操作指南
+description_en: Operating guide for the gateway with built-in ChirpStack, bridging LoRaWAN protocol with Modbus TCP and BACnet IP protocols
+
+# Navigation structure - defines the order of documentation files
+nav:
+  - 用户指南 / User Manual: index.md
