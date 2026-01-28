@@ -47,7 +47,6 @@
 			- [3.4.2.2 使用MQTT GWMP方式连接私有部署IoT Vision](#使用mqtt-gwmp方式连接私有iot)
 		- [3.4.3 使用 ChirpStack MQTT Forwarder方式](#使用chirpstack-mqtt-forwarder方式)
 			- [3.4.3.1 使用ChirpStack MQTT Forwarder方式连接自建的chirpstack平台](#使用chirpstack-mqtt-forwarder方式连接chirpstack)
-			- [3.4.3.2 使用ChirpStack MQTT Forwarder方式连接私有部署IoT Vision](#使用chirpstack-mqtt-forwarder方式连接私有iot)
 		- [3.4.4 使用 Basic station CUPS方式](#使用basic-station-cups方式)
 			- [3.4.4.1 使用Basic station CUPS方式连接亚马逊平台](#使用basic-station-cups方式连接亚马逊平台)	
 		- [3.4.5 使用 Basic station LNS方式](#使用basic-station-lns方式)
@@ -68,7 +67,6 @@
 			- [3.6.2.2 使用MQTT GWMP方式连接私有部署IoT Vision](#配置16通道网关使用mqtt-gwmp方式连接私有iot)
 		- [3.6.3 配置16通道网关使用 ChirpStack MQTT Forwarder方式](#配置16通道网关使用chirpstack-mqtt-forwarder方式)
 			- [3.6.3.1 使用ChirpStack MQTT Forwarder方式连接自建的chirpstack平台](#配置16通道网关使用chirpstack-mqtt-forwarder方式连接chirpstack)
-			- [3.6.3.2 使用ChirpStack MQTT Forwarder方式连接私有部署IoT Vision](#配置16通道网关使用chirpstack-mqtt-forwarder方式连接私有iot)
 		- [3.6.4 配置16通道网关使用 Basic station CUPS方式](#配置16通道网关使用basic-station-cups方式)
 			- [3.6.4.1 使用Basic station CUPS方式连接亚马逊平台](#配置16通道网关使用basic-station-cups方式连接亚马逊平台)	
 		- [3.6.5 配置16通道网关使用 Basic station LNS方式](#配置16通道网关使用basic-station-lns方式)
@@ -981,17 +979,30 @@ WAN口生效成功
 
 ---
 
-## 配置LoRa通信模式
+### 配置lora网关频段以及频点
+
+
+
+
+---
+
+### 配置lora网关连接外部ns服务器
 
 网关支持多种 LoRa 通信协议和数据转发方式，可灵活对接不同的网络服务器和物联网平台。以下详细介绍各种配置方式。
 
-### 连接外部 NS
-
-#### 1.UDP 协议连接TTN(thethingsnetwork)平台
+#### 使用udp方式
 
 UDP GWMP（Gateway Message Protocol）是 Semtech 定义的标准协议，广泛用于连接 TTN、chirpstack 等开源网络服务器。
 
 **应用场景**：连接 The Things Network (TTN)、自建 chirpstack 服务器等。
+
+##### 使用udp方式连接chirpstack
+
+
+
+
+##### 使用udp方式连接ttn
+
 
 **操作步骤**：
 1. 登录网关界面，在 网络->LoRa网关，如果要配置第二个LoRa(16通道版本)，则在 网络->**16通道扩展(16-channel expansion)**
@@ -1084,11 +1095,17 @@ ttn平台出现输入网关ID输入框
  ![网关在ttn平台在线](images/gateway_online_ttn.png)
  
 
-#### 2. MQTT 协议连接唯传的IoT平台
+#### 使用mqtt-gwmp方式
 
-MQTT 协议适用于需要更灵活消息机制的场景，支持连接唯传公司的IoT公有云平台，包括唯传公司提供的私有化部署IoT中间件。
+MQTT 协议适用于需要更灵活消息机制的场景，支持连接唯传公司的IoT Vision公有云平台，包括唯传公司提供的私有化部署IoT Vision。
 
-**应用场景**：IoT公有云、IoT私有化部署。
+**应用场景**：IoT Vision公有云、IoT Vision私有化部署。
+
+
+##### 使用mqtt-gwmp方式连接公有云iot
+
+
+##### 使用mqtt-gwmp方式连接私有iot
 
 **操作步骤**：
 1. 导航至 **LoRa** → **MQTT Forwarder（MQTT 转发器）**
@@ -1109,11 +1126,14 @@ MQTT 协议适用于需要更灵活消息机制的场景，支持连接唯传公
 
 ---
 
-#### 3. chirpstack-mqtt-forwarder 协议
+#### 使用chirpstack-mqtt-forwarder方式
 
 chirpstack-mqtt-forwarder 是 chirpstack 开源项目提供的 MQTT 转发协议，使用 Protobuf 编码，效率更高。
 
 **应用场景**：连接 chirpstack V4 网络服务器。
+
+##### 使用chirpstack-mqtt-forwarder方式连接chirpstack
+
 
 **操作步骤**：
 1. 导航至 **LoRa** → **chirpstack MQTT Forwarder**
@@ -1127,11 +1147,44 @@ chirpstack-mqtt-forwarder 是 chirpstack 开源项目提供的 MQTT 转发协议
 
 ---
 
-#### 4. LNS 协议（Basic Station）
+#### 使用basic-station-cups方式
+
+CUPS（Configuration and Update Server）协议用于自动获取 LNS 配置和证书，常用于 AWS IoT Core。
+
+**应用场景**：AWS IoT Core for LoRaWAN。
+
+
+##### 使用basic-station-cups方式连接亚马逊平台
+
+**操作步骤**：
+1. 导航至 **LoRa** → **Basic Station**
+2. 选择 **Mode（模式）** 为 `CUPS`
+3. 配置 CUPS 服务器：
+   - **CUPS URI**：HTTPS 地址（例如：`https://<account-id>.cups.lorawan.amazonaws.com:443`）
+   - **CUPS Trust（信任证书）**：上传 AWS CA 证书
+   - **CUPS Certificate（客户端证书）**：上传网关证书
+   - **CUPS Key（私钥）**：上传网关私钥
+4. 点击 **Save & Apply（保存并应用）**
+5. 网关会自动从 CUPS 服务器获取 LNS 配置
+
+---
+
+#### 使用basic-station-lns方式
 
 LNS（LoRaWAN Network Server）协议基于 WebSocket，支持连接 chirpstack、Helium、Microsoft Azure IoT 等平台。
 
 **应用场景**：chirpstack、Helium Network、Microsoft Azure IoT Central。
+
+##### 使用basic-station-lns方式连接ttn平台
+
+
+
+##### 使用basic-station-lns方式连接chirpstack平台
+
+
+
+##### 使用basic-station-lns方式连接helium平台
+
 
 **操作步骤**：
 1. 导航至 **LoRa** → **Basic Station**
@@ -1153,24 +1206,6 @@ Certificate: 上传 gateway.crt
 Key: 上传 gateway.key
 ```
 
----
-
-#### 5. CUPS 协议（Basic Station）
-
-CUPS（Configuration and Update Server）协议用于自动获取 LNS 配置和证书，常用于 AWS IoT Core。
-
-**应用场景**：AWS IoT Core for LoRaWAN。
-
-**操作步骤**：
-1. 导航至 **LoRa** → **Basic Station**
-2. 选择 **Mode（模式）** 为 `CUPS`
-3. 配置 CUPS 服务器：
-   - **CUPS URI**：HTTPS 地址（例如：`https://<account-id>.cups.lorawan.amazonaws.com:443`）
-   - **CUPS Trust（信任证书）**：上传 AWS CA 证书
-   - **CUPS Certificate（客户端证书）**：上传网关证书
-   - **CUPS Key（私钥）**：上传网关私钥
-4. 点击 **Save & Apply（保存并应用）**
-5. 网关会自动从 CUPS 服务器获取 LNS 配置
 
 ---
 
