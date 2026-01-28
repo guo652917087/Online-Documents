@@ -1215,7 +1215,370 @@ Key: 上传 gateway.key
 
 ---
 
-### 使用内置 NS
+
+### 配置16通道网关频段以及频点
+
+
+#### 配置16通道网关cn470频段以及频点说明
+
+
+#### 配置16通道网关868半双工硬件切换频段说明
+
+
+#### 配置16通道网关915半双工硬件切换频段说明
+
+---
+
+### 配置16通道网关连接外部ns服务器
+
+网关支持多种 LoRa 通信协议和数据转发方式，可灵活对接不同的网络服务器和物联网平台。以下详细介绍各种配置方式。
+
+#### 配置16通道网关使用udp方式
+
+UDP GWMP（Gateway Message Protocol）是 Semtech 定义的标准协议，广泛用于连接 TTN、chirpstack 等开源网络服务器。
+
+**应用场景**：连接 The Things Network (TTN)、自建 chirpstack 服务器等。
+
+##### 配置16通道网关使用udp方式连接chirpstack
+
+
+
+
+##### #配置16通道网关使用udp方式连接ttn
+
+
+**操作步骤**：
+1. 登录网关界面，在 网络->LoRa网关，如果要配置第二个LoRa(16通道版本)，则在 网络->**16通道扩展(16-channel expansion)**
+![loRa网关页面](images/lora_gateway_web.png)
+
+16通道，需要再配置第二个lora页面：16通道扩展(16-channel expansion)
+
+![loRa16通道扩展页面](images/lora2_gateway_web.png)
+
+2. 导航至 **LoRa网关(LoRa GW)** → **配置(Configuration)**
+
+![loRa配置页面](images/lora_config.png)
+
+3. 切换需要使用的LoRaWAN频段
+
+切换频段不会更改网关默认的EUI，如果之前配置页面参数填乱了，也可以通过切换到别的频段，再切换回来，让频段的参数重新初始化
+
+470版本仅支持CN470版本，470的硬件不需要切换频段
+868版本可以支持EU868、RU864、IN865三个频段切换
+915版本可以支持US902-928、AU915-928、AS923-1、AS923-2、AS923-3、AS923-4、KR920
+
+现在以EU868与RU864切换(共同的硬件，使用不同的软件参数)为例
+
+我们以EU868切换到RU864,示例
+
+在选项**LoRaWAN® 频段（LoRaWAN® regions）** 下拉选择RU864
+![loRa配置选中RU864频段](images/lora_config_select_ru864.png)
+
+在选项**初始化LoRaWAN频段参数（Initialize LoRaWAN frequency band parameters）** 点击按钮 **切换LORAWAN频段（SWITCH LORAWAN FREQUENCY BAND）**
+![loRa配置点击切换RU864频段](images/lora_config_button_switch_ru864.png)
+
+等待参数初始化，右上角会出现：未保存的配置项，说明参数切换过去，只是没有暂时生效
+![loRa配置切换RU864频段参数未保存](images/lora_config_switch_ru864_not_apply.png)
+
+需要生效参数，下拉页面到右下角，有个"保存并应用"的按钮，点击它
+![loRa配置找到保存并应用按钮](images/lora_config_find_apply_button.png)
+
+点击"保存并应用"后，等待10-20秒，返回配置页面，会看到当前生效的频段，以及右上角已经没有未保存的参数
+![loRa配置生效后的状态](images/lora_config_after_apply_ru864.png)
+
+
+4. 以连接到TTN(console.cloud.thethings.network)平台示例(需要自行注册平台的登录账号)
+![登录TTN控制台](images/login_ttn_console.png)
+
+在ttn平台找到"Register gateway"
+
+![找到注册网关按钮](images/find_register_gateway_button.png)
+
+ttn平台出现输入网关ID输入框
+
+![输入网关](images/edit_gateway_eui.png)
+
+在浏览器另一窗口，登录网关页面，找到lora网关的ID，复制它
+
+![复制网关ID](images/copy_gateway_id.png)
+
+在ttn平台粘贴网关ID，并且点击"Confirm"
+![粘贴网关ID](images/copy_gateway_to_ttn.png)
+
+
+在ttn平台用刚刚复制的网关ID，粘贴到"Gateway ID"、"Gateway name"，选择"frequency plan",填完并且点击"Register gateway"
+![填完网关ID](images/edit_and_register_gateway.png)
+
+已经注册到ttn平台，此时需要在网关填写服务器地址
+
+![注册到ttn平台](images/register_gateway_ok.png)
+
+
+> **注意事项**：
+> - 配置UDP服务器地址前，请确认域名地址,我们查看当前ttn为我们网关分配的域名前缀，为: au1
+
+所以需要在网关里，选择UDP协议，服务器选择ttn的au1域名节点
+
+![ttn平台的域名](images/ttn_name1.png)
+
+   - **Server Address（服务器地址）**：目标 NS 的域名或 IP（例如：`au1.cloud.thethings.network`）
+   - **Server Port Up（上行端口）**：通常为 1700
+   - **Server Port Down（下行端口）**：通常为 1700
+   
+网关页面配置UDP方式连接ttn平台
+   
+ ![网关配置ttn平台的域名](images/config_gateway_connect_ttn.png)
+ 
+点击 **Save & Apply（保存并应用）**
+
+ ![网关配置完点击保存并应用](images/config_gateway_apply_button.png)
+
+等待30-60秒，在ttn平台看网关状态，已经在线
+
+ ![网关在ttn平台在线](images/gateway_online_ttn.png)
+ 
+
+#### 配置16通道网关使用mqtt-gwmp方式
+
+MQTT 协议适用于需要更灵活消息机制的场景，支持连接唯传公司的IoT Vision公有云平台，包括唯传公司提供的私有化部署IoT Vision。
+
+**应用场景**：IoT Vision公有云、IoT Vision私有化部署。
+
+
+##### 配置16通道网关使用mqtt-gwmp方式连接公有云iot
+
+
+##### 配置16通道网关使用mqtt-gwmp方式连接私有iot
+
+**操作步骤**：
+1. 导航至 **LoRa** → **MQTT Forwarder（MQTT 转发器）**
+
+
+2. 启用 MQTT 转发功能
+3. 配置 MQTT Broker 参数：
+   - **Broker Address（Broker 地址）**：MQTT 服务器地址
+   - **Broker Port（端口）**：通常为 1883（TCP）或 8883（TLS）
+   - **Username（用户名）**：Broker 认证用户名
+   - **Password（密码）**：Broker 认证密码
+   - **Client ID（客户端 ID）**：网关唯一标识
+   - **Topic Prefix（主题前缀）**：消息主题前缀
+4. 配置 TLS（可选）：
+   - 启用 **Use TLS（使用 TLS）**
+   - 上传 CA 证书、客户端证书和密钥
+5. 点击 **Save & Apply（保存并应用）**
+
+---
+
+#### 配置16通道网关使用chirpstack-mqtt-forwarder方式
+
+chirpstack-mqtt-forwarder 是 chirpstack 开源项目提供的 MQTT 转发协议，使用 Protobuf 编码，效率更高。
+
+**应用场景**：连接 chirpstack V4 网络服务器。
+
+##### 配置16通道网关使用chirpstack-mqtt-forwarder方式连接chirpstack
+
+
+**操作步骤**：
+1. 导航至 **LoRa** → **chirpstack MQTT Forwarder**
+2. 配置 MQTT 连接参数：
+   - **MQTT Server（服务器）**：chirpstack MQTT Broker 地址
+   - **MQTT Port（端口）**：1883 或 8883
+   - **Topic Prefix（主题前缀）**：通常为 `eu868`、`us915` 等（根据频段）
+   - **Gateway ID（网关 ID）**：chirpstack 中注册的网关 ID
+3. 配置 JSON 或 Protobuf 编码方式（推荐 Protobuf）
+4. 点击 **Save & Apply（保存并应用）**
+
+---
+
+#### 配置16通道网关使用basic-station-cups方式
+
+CUPS（Configuration and Update Server）协议用于自动获取 LNS 配置和证书，常用于 AWS IoT Core。
+
+**应用场景**：AWS IoT Core for LoRaWAN。
+
+
+##### 配置16通道网关使用basic-station-cups方式连接亚马逊平台
+
+**操作步骤**：
+1. 导航至 **LoRa** → **Basic Station**
+2. 选择 **Mode（模式）** 为 `CUPS`
+3. 配置 CUPS 服务器：
+   - **CUPS URI**：HTTPS 地址（例如：`https://<account-id>.cups.lorawan.amazonaws.com:443`）
+   - **CUPS Trust（信任证书）**：上传 AWS CA 证书
+   - **CUPS Certificate（客户端证书）**：上传网关证书
+   - **CUPS Key（私钥）**：上传网关私钥
+4. 点击 **Save & Apply（保存并应用）**
+5. 网关会自动从 CUPS 服务器获取 LNS 配置
+
+---
+
+#### 配置16通道网关使用basic-station-lns方式
+
+LNS（LoRaWAN Network Server）协议基于 WebSocket，支持连接 chirpstack、Helium、Microsoft Azure IoT 等平台。
+
+**应用场景**：chirpstack、Helium Network、Microsoft Azure IoT Central。
+
+##### 配置16通道网关使用basic-station-lns方式连接ttn平台
+
+
+
+##### 配置16通道网关使用basic-station-lns方式连接chirpstack平台
+
+
+
+##### 配置16通道网关使用basic-station-lns方式连接helium平台
+
+
+**操作步骤**：
+1. 导航至 **LoRa** → **Basic Station**
+2. 选择 **Mode（模式）** 为 `LNS`
+3. 配置 LNS 服务器：
+   - **LNS URI**：WebSocket 地址（例如：`wss://chirpstack.example.com:8887`）
+   - **Authentication Mode（认证模式）**：选择 TLS Server & Client Authentication
+   - **Trust（信任证书）**：上传服务器 CA 证书
+   - **Certificate（客户端证书）**：上传网关客户端证书
+   - **Key（私钥）**：上传网关私钥
+4. 点击 **Save & Apply（保存并应用）**
+
+**配置示例（chirpstack）**：
+```
+LNS URI: wss://chirpstack.example.com:8887
+Authentication Mode: TLS Server & Client Authentication
+Trust: 上传 ca.crt
+Certificate: 上传 gateway.crt
+Key: 上传 gateway.key
+```
+
+
+---
+### 使用内置ns服务器
+
+
+#### 切换内置模式
+
+#### 添加唯传自研的lorawan传感器到内置chirpstack服务器
+
+#### 添加第三方的lorawan设备到内置chirpstack服务器
+
+
+#### 删除内置ns的设备
+
+
+#### 使用excel表格批量添加设备
+
+#### 导出所有设备到excel表格
+
+
+#### 使用chirpstack-rest-api接口
+
+
+#### 使用node-red界面
+
+
+#### 查询设备历史数据
+
+
+##### 按照最新条数查询设备历史数据
+
+##### 按照时间段查询设备历史数据
+
+
+#### 使用mqtt推送chirpstack的实时消息到客户的mqtt服务器
+
+
+#### 使用http推送chirpstack的实时消息到客户的http服务器
+
+
+---
+
+### 使用hub物模型
+
+
+#### 设置设备的传感器物模型
+
+#### 查看设备的物模型实时数据
+
+#### 查看设备的物模型历史数据
+
+##### 根据最新条数查询设备的物模型历史数据
+
+##### 根据时间段查询设备的物模型历史数据
+
+
+#### 使用modbus-tcp获取设备数据
+
+##### 设置设备支持modbus-tcp映射
+
+##### 通过modbus-poll工具获取设备实时数据
+
+##### 通过python3脚本使用modbus-tcp方式获取设备实时数据
+
+
+#### 使用bacnet-bip获取设备数据
+
+##### 设置设备支持bacnet-bip映射
+
+##### 通过yabe工具获取设备实时数据
+
+##### 通过python3脚本使用bacnet-bip方式获取设备实时数据
+
+
+#### 使用hub的http接口
+
+##### 通过hub的http接口获取设备实时数据
+
+##### 通过hub的http接口获取设备列表
+
+##### 通过hub的http接口获取设备历史数据
+
+
+---
+
+
+### 使用网关的内置ns集群和设备漫游
+
+#### 网关集群能力介绍
+
+#### 网关集群框架
+
+#### 设置集群服务器
+
+#### 查看连接到集群服务器的状态
+
+
+
+---
+
+### 网关使用fuota给设备做固件空中升级
+
+#### fuota固件空中升级介绍
+
+#### fuota固件空中升级框架流程
+
+---
+
+### 网关远程运维和技术支持
+
+#### 网关远程运维介绍
+
+#### 网关远程运维框架流程
+
+#### 请求远程协助
+
+---
+
+
+### 查看网关定位gpsbeidou情况
+
+
+---
+
+### 唯传自研产品获得数据示例
+
+#### 温湿度传感器an-303数据示例
+
+
+---
 
 #### 6. 配置内置 NS 使用 MQTT 推送数据
 
