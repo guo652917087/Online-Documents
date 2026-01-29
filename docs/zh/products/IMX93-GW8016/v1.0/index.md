@@ -304,14 +304,16 @@ IMX93-GW8016 网关系列提供 3 个硬件版本，分别针对不同频段和�
 
 ### 网关内部硬件接口概况
 
-系统内
-WAN：支持千兆速率、支持48V PoE供电，连网功能，默认DHCP客户端，接广域网，连服务器
-LAN：默认DHCPD服务，会分配192.168.60.x的IP给电脑，接电脑配置使用
-DC：12V到24V/2A供电，极限电压：9V~28V
-Factory Reset Button：恢复出厂设置按钮，长按时间超过6秒钟，系统灯会闪烁，松开后，系统进入恢复出厂设置；短按系统触发重启
-CPU Reset Button:对应system reset丝印的按钮，按一次就会cpu硬件复位
+- 系统内
+- WAN：支持千兆速率、支持48V PoE供电，连网功能，默认DHCP客户端，接广域网，连服务器
+- LAN：默认DHCPD服务，会分配192.168.60.x的IP给电脑，接电脑配置使用
+- DC：12V到24V/2A供电，极限电压：9V~28V
+- Factory Reset Button：恢复出厂设置按钮，长按时间超过6秒钟，系统灯会闪烁，松开后，系统进入恢复出厂设置；短按系统触发重启
+- CPU Reset Button:对应system reset丝印的按钮，按一次就会cpu硬件复位
 
 ![网关内部硬件接口](images/overview_of_hardware_interfaces.jpg)
+
+---
 
 ### cn470-全双工版本
 
