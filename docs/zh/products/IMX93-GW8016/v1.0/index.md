@@ -198,7 +198,7 @@ IMX93-GW8016 网关具有以下核心优势：
 
 
 ### 4. 内置网络服务器
-- 预装 chirpstack V4.x 网络服务器，支持本地设备管理
+- 预装 chirpstack V4.16.0 网络服务器，支持本地设备管理
 - 无需外部云平台即可完成 LoRaWAN 设备接入和数据采集
 - 定期更新至 chirpstack 最新版本
 
@@ -324,8 +324,8 @@ IMX93-GW8016 网关系列提供 3 个硬件版本，分别针对不同频段和�
 - 工作模式：全双工模式，使用双工器实现收发分离
 
 **频段范围**：
-- 接收频段：470MHz ~ 490MHz
-- 发射频段：500MHz ~ 510MHz
+- 接收频点范围：470MHz ~ 490MHz
+- 发射频点范围：500MHz ~ 510MHz
 
 **LBT 功能**：
 - 不启用 LBT,LoRa LBT（Listen Before Talk）是 LoRa/LoRaWAN 网络中的一项关键机制，它允许设备在传输之前通过监听干扰（RSSI）来检查通信信道是否畅通（不繁忙），从而防止冲突，提高密集环境中的效率，并满足（如日本/韩国）频谱共享的监管要求，从而将网络性能提升到超越基本 ALOHA 的水平
@@ -389,21 +389,42 @@ IMX93-GW8016 网关系列提供 3 个硬件版本，分别针对不同频段和�
   - **LNS 模式**：支持连接 chirpstack、Helium、Microsoft Azure IoT 等平台
   - **CUPS 模式**：支持 AWS IoT Core for LoRaWAN，通过 HTTPS 自动获取 LNS 接入点和 TLS 证书
 
-### 数据转发与集成
-- **内置 NS 数据转发**：chirpstack 内置网络服务器支持多种数据转发方式
+### 内置chirpstack-v4.16.0 
+- **内置 NS 解析与数据推送**：chirpstack 内置网络服务器支持多种 **推送方式(integrations)** 设备数据
   - MQTT v3.1.1 推送与订阅
-  - HTTP POST 推送
+  - HTTP 推送
+  - AWS SNS
+  - Azure Service-Bus
+  - Blynk
+  - GCP Pub/Sub
+  - IFTTT
+  - InfluxDB
+  - myDevices
+  - Pilot Things
+  - ThingsBoard
+  
+  
+### Hub物模型汇聚和多种协议映射
+- **IoT Hub 管理物模型和LoRaWAN低速低功耗设备与TCP/IP高速快速获取建立映射关系**
+  - HTTP GET 查询实时数据和历史数据
   - Modbus TCP 协议（支持配置端口和从站 ID）
   - BACnet BIP 协议（基于 UDP，支持配置设备对象 ID）
 
-### 二次开发与扩展
+  
+### 定制开发与扩展
+- **网关界面中性不带唯传公司logo**：支持中性的中英文界面，会有chirpstack开源项目的特有英文界面
 - **Python 3.11**：支持编写自定义数据处理的python3脚本，实现复杂业务逻辑
 - **ubus（OpenWrt）**：系统级消息总线，便于进程间通信和系统集成
 - **zmq**：消息队列，提供chirpstack和hub的实时数据通信接口
 - **Node-Red**：支持使用node页面编写自定义数据处理的node.js脚本
 - **IoT Hub**：支持 TSL（Thing Specification Language，物模型）定义，灵活配置设备属性字段
+
+
+### 易于维护
+- **支持excel表格批量操作**：支持excel表格导入和导出设备、导出历史数据
 - **集群管理**：支持多网关集群部署和设备漫游功能
 - **安全远程访问**：内置 VPN 支持，便于远程技术支持和维护
+- **设备远程FUOTA**：仅限于唯传公司的LoRaWAN Class C 设备
 
 ---
 
