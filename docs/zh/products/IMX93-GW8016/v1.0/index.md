@@ -1477,13 +1477,90 @@ US902-928网关的上行/下行频点表格,出厂默认A1B1
 
 ##### 915硬件版本切换AU915频段
 
-AU915-928网关的上行/下行频点表格,出厂默认A1B1
+
+AU915-928网关8通道默认频点A1B1
+
+- Uplink:
+
+	- 915.2 - SF7BW125 to SF10BW125
+	- 915.4 - SF7BW125 to SF10BW125
+	- 915.6 - SF7BW125 to SF10BW125
+	- 915.8 - SF7BW125 to SF10BW125
+	- 916.0 - SF7BW125 to SF10BW125
+	- 916.2 - SF7BW125 to SF10BW125
+	- 916.4 - SF7BW125 to SF10BW125
+	- 916.6 - SF7BW125 to SF10BW125
+	- 915.9 - SF8BW500
+	
+- Downlink:
+
+	- 923.3 - SF7BW500 to SF12BW500 (RX1)
+	- 923.9 - SF7BW500 to SF12BW500 (RX1)
+	- 924.5 - SF7BW500 to SF12BW500 (RX1)
+	- 925.1 - SF7BW500 to SF12BW500 (RX1)
+	- 925.7 - SF7BW500 to SF12BW500 (RX1)
+	- 926.3 - SF7BW500 to SF12BW500 (RX1)
+	- 926.9 - SF7BW500 to SF12BW500 (RX1)
+	- 927.5 - SF7BW500 to SF12BW500 (RX1)
+	- 923.3 - SF12BW500 (RX2)
+
+---
+
+- 16扩展通道是A2B2
+
+- Uplink:
+
+	- 916.8 - SF7BW125 to SF10BW125
+	- 917.0 - SF7BW125 to SF10BW125
+	- 917.2 - SF7BW125 to SF10BW125
+	- 917.4 - SF7BW125 to SF10BW125
+	- 917.6 - SF7BW125 to SF10BW125
+	- 917.8 - SF7BW125 to SF10BW125
+	- 918.0 - SF7BW125 to SF10BW125
+	- 918.2 - SF7BW125 to SF10BW125
+	- 917.5 - SF8BW500
+	
+- Downlink:
+
+	- 923.3 - SF7BW500 to SF12BW500 (RX1)
+	- 923.9 - SF7BW500 to SF12BW500 (RX1)
+	- 924.5 - SF7BW500 to SF12BW500 (RX1)
+	- 925.1 - SF7BW500 to SF12BW500 (RX1)
+	- 925.7 - SF7BW500 to SF12BW500 (RX1)
+	- 926.3 - SF7BW500 to SF12BW500 (RX1)
+	- 926.9 - SF7BW500 to SF12BW500 (RX1)
+	- 927.5 - SF7BW500 to SF12BW500 (RX1)
+	- 923.3 - SF12BW500 (RX2)
+
+---
+
+AU915-928网关的上行/下行频点表格
 
 ![au915频段表格](images/au915_frequency_plans.png)
 
 ---
 
 ##### 915硬件版本切换AS923-1频段
+
+
+AS923-1网关默认频点
+
+- Uplink:
+	- 923.2 - SF7BW125 to SF12BW125
+	- 923.4 - SF7BW125 to SF12BW125 
+	- 923.6 - SF7BW125 to SF12BW125
+	- 923.8 - SF7BW125 to SF12BW125
+	- 924.0 - SF7BW125 to SF12BW125
+	- 924.2 - SF7BW125 to SF12BW125
+	- 924.4 - SF7BW125 to SF12BW125
+	- 924.6 - SF7BW125 to SF12BW125
+	- 924.6 - FSK
+- Downlink:
+
+	- Uplink channels 1-9 (RX1)
+	- 923.2 - SF10BW125 (RX2)
+	
+---
 
 AS923-1网关的上行/下行频点表格
 
@@ -1493,6 +1570,25 @@ AS923-1网关的上行/下行频点表格
 
 ##### 915硬件版本切换AS923-2频段
 
+AS923-2网关默认频点
+
+- Uplink:
+	- 921.4 - SF7BW125 to SF12BW125
+	- 921.6 - SF7BW125 to SF12BW125 
+	- 921.8 - SF7BW125 to SF12BW125
+	- 922.0 - SF7BW125 to SF12BW125
+	- 922.2 - SF7BW125 to SF12BW125
+	- 922.4 - SF7BW125 to SF12BW125
+	- 922.6 - SF7BW125 to SF12BW125
+	- 922.8 - SF7BW125 to SF12BW125
+	- 922.8 - FSK
+- Downlink:
+
+	- Uplink channels 1-9 (RX1)
+	- 921.4 - SF10BW125 (RX2)
+	
+---
+
 AS923-2网关的上行/下行频点表格
 
 ![as923-2频段表格](images/as923_2_frequency_plans.png)
@@ -1500,6 +1596,25 @@ AS923-2网关的上行/下行频点表格
 ---
 
 ##### 915硬件版本切换AS923-3频段
+
+AS923-3网关默认频点
+
+- Uplink:
+	- 916.6 - SF7BW125 to SF12BW125
+	- 916.8 - SF7BW125 to SF12BW125 
+	- 917.0 - SF7BW125 to SF12BW125
+	- 917.2 - SF7BW125 to SF12BW125
+	- 917.4 - SF7BW125 to SF12BW125
+	- 917.6 - SF7BW125 to SF12BW125
+	- 917.8 - SF7BW125 to SF12BW125
+	- 918.0 - SF7BW125 to SF12BW125
+	- 918.0 - FSK
+- Downlink:
+
+	- Uplink channels 1-9 (RX1)
+	- 916.6 - SF10BW125 (RX2)
+	
+---
 
 AS923-3网关的上行/下行频点表格
 
@@ -1509,6 +1624,26 @@ AS923-3网关的上行/下行频点表格
 
 ##### 915硬件版本切换AS923-4频段
 
+
+AS923-4网关默认频点
+
+- Uplink:
+	- 917.3 - SF7BW125 to SF12BW125
+	- 917.5 - SF7BW125 to SF12BW125 
+	- 917.7 - SF7BW125 to SF12BW125
+	- 917.9 - SF7BW125 to SF12BW125
+	- 918.1 - SF7BW125 to SF12BW125
+	- 918.3 - SF7BW125 to SF12BW125
+	- 918.5 - SF7BW125 to SF12BW125
+	- 918.7 - SF7BW125 to SF12BW125
+	- 918.7 - FSK
+- Downlink:
+
+	- Uplink channels 1-9 (RX1)
+	- 917.3 - SF10BW125 (RX2)
+	
+---
+
 AS923-4网关的上行/下行频点表格
 
 ![as923-4频段表格](images/as923_4_frequency_plans.png)
@@ -1517,7 +1652,26 @@ AS923-4网关的上行/下行频点表格
 
 ##### 915硬件版本切换KR920频段
 
-KR920网关的上行/下行频点表格
+
+KR920-923网关默认频点
+
+- Uplink:
+	- 921.9 - SF7BW125 to SF12BW125
+	- 922.1 - SF7BW125 to SF12BW125 
+	- 922.3 - SF7BW125 to SF12BW125
+	- 922.5 - SF7BW125 to SF12BW125
+	- 922.7 - SF7BW125 to SF12BW125
+	- 922.9 - SF7BW125 to SF12BW125
+	- 923.1 - SF7BW125 to SF12BW125
+	- 923.3 - SF7BW125 to SF12BW125
+- Downlink:
+
+	- Uplink channels 1-8 (RX1)
+	- 921.9 - SF10BW125 (RX2)
+	
+---
+
+KR920-923网关的上行/下行频点表格
 
 ![kr920频段表格](images/kr920_frequency_plans.png)
 
